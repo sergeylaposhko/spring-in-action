@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,7 +16,7 @@ public class CDPlayer {
     private CompactDisk compactDisk;
 
     @Autowired
-    CDPlayer(CompactDisk compactDisk){
+    CDPlayer(@Qualifier("simpleCompactDisk") CompactDisk compactDisk){
         this.compactDisk = compactDisk;
     }
 

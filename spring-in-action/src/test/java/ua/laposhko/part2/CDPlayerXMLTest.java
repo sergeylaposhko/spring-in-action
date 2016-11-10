@@ -12,42 +12,18 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = CDPlayerConfig.class)
-public class CDPlayerTest {
-
-    @Autowired
-    @Qualifier("simpleCompactDisk")
-    private CompactDisk compactDisk;
-
-    @Autowired
-    @Qualifier("CDPlayer")
-    private CDPlayer cdPlayer;
-
-    @Autowired
-    @Qualifier("anotherCDPlayer")
-    private CDPlayer anotherCDPlayer;
+public class CDPlayerXMLTest {
 
     @Autowired
     @Qualifier("playerFromXml")
     private CDPlayer playerFromXml;
 
     @Test
-    public void testNotNull() {
-        assertNotNull(compactDisk);
-    }
-
-    @Test
-    public void testNotEmpty() {
-        assertTrue(cdPlayer.getCompactDisk() != null);
-    }
-
-    @Test
-    public void testNotNullAnotherPlayer() throws Exception {
-        assertNotNull(anotherCDPlayer);
-    }
-
-    @Test
     public void testXmlConfigNotNull() throws Exception {
         assertNotNull(playerFromXml);
         assertNotNull(playerFromXml.getCompactDisk());
+        assertTrue(playerFromXml.getCompactDisk() instanceof XMLCompactDisk);
+        XMLCompactDisk compactDisk = (XMLCompactDisk) playerFromXml.getCompactDisk();
+        assertTrue(compactDisk.getName().equals("diskFromXml"));
     }
 }
